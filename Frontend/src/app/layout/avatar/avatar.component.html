@@ -1,0 +1,31 @@
+<div class="avatar-container">
+    <div *ngIf="avatarUrl; else defaultAvatar">
+        <p-avatar
+            image="{{ avatarUrl }}"
+            size="large"
+            shape="circle"
+            class="p-mr-2"
+        >
+        </p-avatar>
+    </div>
+    <ng-template #defaultAvatar>
+        <div class="default-avatar">
+            <p-avatar
+                label="{{ getNameFirstLetter(name) }}"
+                styleClass="mr-2"
+                size="large"
+                [style]="{ 'background-color': '#2196F3', color: '#ffffff' }"
+                shape="circle"
+            ></p-avatar>
+        </div>
+    </ng-template>
+    <div class="name-username">
+        <app-msteams
+            [linkStyles]="{ color: 'inherit' }"
+            [email]="username + sopraEmail"
+            [linkText]="name"
+            [message]="defaultMessage + username.split('.')[0] + ','"
+        ></app-msteams>
+        <p>{{ username }}</p>
+    </div>
+</div>

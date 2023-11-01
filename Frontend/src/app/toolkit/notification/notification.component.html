@@ -1,0 +1,39 @@
+<button class="p-link layout-topbar-button" (click)="op.toggle($event)">
+    <i class="pi pi-bell text-3xl" pBadge value="4" severity="danger"></i>
+    
+
+</button>
+
+<p-overlayPanel [style]="{ width: '28vw',height: 'auto' }" #op>
+
+    <div>
+        <i class="pi pi-times close-icon" (click)="op.hide()"></i>
+    </div>
+
+    <div class="flex align-items-center justify-content-between mb-4">
+        <h5>{{pending_mr}}</h5>
+    </div>
+
+    
+    <li class="flex align-items-center py-2">
+
+        <div class="w-3rem h-3rem flex align-items-center justify-content-center bg-orange-100 border-circle mr-3 flex-shrink-0">
+            <i class="pi pi-share-alt text-xl text-orange-500"></i>
+        </div>
+        <span class="text-700 line-height-3">Some Merge Requests are pending for
+            <span class="text-blue-500 font-medium">More than 7 days</span>
+        </span>
+    </li>
+    
+
+       
+    <hr>
+    <div class="modal-footer">
+        <button class = "btn_hide"(click)="op.hide()">
+            <a href="/#/home/merge" class="see-more-link">See More..</a>
+        </button>
+        
+    </div>
+
+
+</p-overlayPanel>

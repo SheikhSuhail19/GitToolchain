@@ -1,0 +1,27 @@
+
+{
+    "home": {
+        "main": "HOME",
+        "dashboard": "Dashboard"
+    },
+    "your_work": {
+        "main": "YOUR WORK",
+        "groups": "Groups",
+        "commits": "Commits",
+        "repository": "Repository",
+        "branches": "Branches",
+        "merge_req": "Merge Request",
+        "members":"Members",
+        "pipelines":"Pipelines",
+        "charts": "Charts",
+        "misc": "Misc"
+    },
+    "others": {
+        "main": "Others",
+        "auth":"Auth",
+        "login":"Login",
+        "error":"Error",
+        "access_denied":"Access Denied",
+        "web": "Web"
+    }
+}

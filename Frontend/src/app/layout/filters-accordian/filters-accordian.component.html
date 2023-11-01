@@ -1,0 +1,42 @@
+<p-accordion [activeIndex]="[0]" style="margin: 20px">
+    <p-accordionTab header="Filters" style="margin-top: 20px">
+        <span class="p-float-label">
+            <p-dropdown
+                [options]="option1"
+                [(ngModel)]="canDevPush"
+                inputId="float-label"
+                (onChange)="onDevPushChange($event.value)"
+            ></p-dropdown>
+            <label for="float-label">Developers can push</label>
+        </span>
+        <span class="p-float-label">
+            <p-dropdown
+                [options]="option2"
+                [(ngModel)]="canDevMerge"
+                inputId="float-label2"
+                (onChange)="onDevCanMerge($event.value)"
+            ></p-dropdown>
+            <label for="float-label2">Developers can merge</label>
+        </span>
+        <span class="p-float-label">
+            <p-dropdown
+                [options]="option1"
+                [(ngModel)]="protectedOrNot"
+                inputId="float-label3"
+                (onChange)="onProtectedOrNot($event.value)"
+            ></p-dropdown>
+            <label for="float-label3">Protected</label>
+        </span>
+        <span class="p-float-label">
+            <p-calendar
+                [(ngModel)]="rangeDates"
+                selectionMode="range"
+                [readonlyInput]="true"
+                inputId="float-label1"
+                [showIcon]="true"
+                (onSelect)="onDateSelect()"
+            ></p-calendar>
+            <label for="float-label1">Filter By Date</label>
+        </span>
+    </p-accordionTab>
+</p-accordion>

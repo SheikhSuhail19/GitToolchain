@@ -1,0 +1,86 @@
+<app-branch-list (repoChange)="repoChange($event)"></app-branch-list>
+<div *ngFor="let commit of pagedCommits">
+    <p-card [style]="{ width: '100%' }" styleClass="p-card-shadow mb-3">
+        <div class="grid">
+            <div class="col-7">
+                <h5>
+                    <strong>{{ commit.title }}</strong>
+                </h5>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-3">
+                <div class="text-center">
+                    <a href="{{ commit.web_url }}" target="_blank">
+                        <p class="commit-box shatext">
+                            <span class="sha-text-black">
+                                {{ commit.short_id }}
+                            </span>
+
+                            <a
+                                href="javascript:void(0)"
+                                (click)="copySHA(commit.short_id)"
+                            >
+                                <i class="fa fa-regular fa-copy"></i>
+                            </a>
+
+                            {{ " " }}
+                            <span class="icon-space"></span>
+                            <a
+                                class="view-icon"
+                                href="{{ commit.web_url }}"
+                                target="_blank"
+                            >
+                                <i class="fa fa-regular fa-folder"></i>
+                            </a>
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <div class="p-subheader">
+                    <app-msteams
+
+                        [linkStyles]="{ color: '#7b83eb' }"
+
+                        [linkText]="commit.author_name"
+
+                        email="{{ commit.author_email }}"
+
+                        message="Hello,"
+
+                    >
+
+                    </app-msteams>
+                </div>
+            </div>
+            <div class="col-3 padding_calender">
+                <div class="p-subheader">
+                    <p class="card-text">
+                        <span
+                            class="pi pi-calendar"
+                            style="color: green"
+                        ></span>
+                        {{ commit.authored_date | date : "HH:mm, MMM d, yyyy" }}
+                    </p>
+                </div>
+            </div>
+            <div class="col-7"></div>
+        </div>
+        <hr />
+
+        <p><strong>Message :</strong> {{ commit.message }}</p>
+    </p-card>
+</div>
+
+<div *ngIf="commits.length > 0">
+    <p-paginator
+        [rows]="pageSize"
+        [totalRecords]="totalCommits.length"
+        [(ngModel)]="currentPage"
+        (onPageChange)="onPageChange($event)"
+        name="page"
+        ngDefaultControl
+    ></p-paginator>
+</div>

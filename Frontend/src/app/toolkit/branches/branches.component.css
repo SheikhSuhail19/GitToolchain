@@ -1,0 +1,12 @@
+.branches-page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 70vh;
+    background-color: rgb(255 255 255);
+    padding: 35px 10px 15px 10px;
+}
+
+h2 {
+    text-align: center;
+    margin: auto;
+}

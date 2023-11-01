@@ -1,0 +1,44 @@
+<p-panel header="Commit List" styleClass="mb-3 ::ng-deep custom-panel-header ">
+    <div class="ms-1 mt-4">
+        <div class="grid">
+            <div class="col-3">
+                <app-repository-dropdown
+                    (repoChangeEvent)="onRepoChange($event)"
+                ></app-repository-dropdown>
+            </div>
+
+            <div class="col-3">
+                <p-dropdown
+                    [options]="branchOptions"
+                    [filter]="true"
+                    filterPlaceholder="Search branches"
+                    [(ngModel)]="selectedBranch"
+                    (onChange)="navigateToCommits()"
+                    placeholder="master"
+                ></p-dropdown>
+            </div>
+
+            <div class="col-4 pr-0" align="right">
+                <span class="p-input p-input-icon-right">
+                    <i class="pi pi-search"></i>
+                    <input
+                        type="text"
+                        pInputText
+                        [(ngModel)]="searchText"
+                        (input)="searchChanged()"
+                        placeholder="Enter commit title"
+                    />
+                </span>
+            </div>
+            <div class="col-2 pl-0 align-items-end" align="right">
+                <button
+                    pButton
+                    type="button"
+                    style="height: 39px; margin-top: 2px"
+                    label="Export as Excel"
+                    (click)="exportCSV()"
+                ></button>
+            </div>
+        </div>
+    </div>
+</p-panel>

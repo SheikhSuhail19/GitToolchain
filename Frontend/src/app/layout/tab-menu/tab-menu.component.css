@@ -1,0 +1,53 @@
+.tab-menu-group-heading {
+    margin-top: 10px;
+    margin-left: 5px;
+    font-size: 25px;
+    font-weight: 500;
+}
+.tab-menu-container {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 7px;
+    padding: 0 4px 0 4px;
+    background-color: white;
+    align-items: center;
+    height: 35px;
+}
+
+.tab-menu-left {
+    display: flex;
+    column-gap: 8px;
+    align-items: center;
+    height: 100%;
+}
+.tab-menu-right {
+    display: flex;
+    column-gap: 15px;
+}
+
+::ng-deep .tab-menu-right .p-dropdown {
+    border-radius: 6px 0 0 6px !important;
+}
+
+::ng-deep .p-inputtext {
+    border-radius: 6px 0 0 6px !important;
+}
+
+::ng-deep .tab-menu-right button {
+    border-radius: 0 6px 6px 0 !important;
+}
+
+::ng-deep .tab-menu-container {
+    height: 100%;
+}
+::ng-deep .new-branch-btn {
+    height: fit-content;
+}
+
+::ng-deep .p-tabmenuitem > a {
+    padding: 1rem 0.75rem 1rem 0.75rem !important;
+}
+
+::ng-deep .p-button {
+    height: 100%;
+}

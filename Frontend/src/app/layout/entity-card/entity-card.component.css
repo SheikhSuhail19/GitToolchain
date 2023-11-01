@@ -1,0 +1,68 @@
+.title {
+    color: black;
+}
+.clickable-link {
+    text-decoration: none;
+    width: fit-content;
+}
+.card-subheading {
+    text-decoration: none;
+}
+.card-container {
+    background-color: white;
+    border: 1px black;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0px 7px 8px -11px #7b8991;
+    margin: 10px 0 10px 0;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+.top-row {
+    display: flex;
+    align-items: baseline;
+}
+
+.branch-link {
+    font-size: small;
+    color: rgb(6, 109, 235) !important;
+}
+.label-container {
+    display: flex;
+    column-gap: 4px;
+    margin-top: 4px;
+}
+.circle-separator {
+    margin: 0 4px 0 4px;
+}
+.author-title {
+    font-size: 10px;
+    margin-left: 4px;
+}
+.card-top-container {
+    display: flex;
+    justify-content: space-between;
+}
+.card-top-right-container {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+::ng-deep .merge-btn {
+    padding: 4px 10px;
+}
+::ng-deep .merge-btn-label {
+    color: black;
+}
+.subheading-container {
+    display: flex;
+}
+.cursor-none {
+    cursor: default;
+}
+/* ::ng-deep .label-outer > div{
+    font-size: 10px !important;
+} */

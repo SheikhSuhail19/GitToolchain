@@ -1,0 +1,16 @@
+/* avatar.component.css */
+.avatar-container {
+    display: flex; /* Use flexbox to arrange items horizontally */
+    align-items: center; /* Center items vertically */
+  }
+  
+  .avatar {
+    flex: 0 0 auto; /* Allow avatar to have a fixed width */
+  }
+  
+  .name-username {
+    flex: 1; /* Expand to fill available space */
+    margin-left: 5px; /* Add some space between avatar and text */
+    
+  }
+  

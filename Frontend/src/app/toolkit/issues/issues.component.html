@@ -1,0 +1,168 @@
+<div class="branches-page-container">
+    <app-tab-menu
+    [isDropdown]="true"
+    [isSortByDropDown]="false"
+    (repoChangeEvent)="onRepoChange($event)"
+    (searchResult)="searchByAuthor($event)"
+    ></app-tab-menu>
+
+
+    <div class="my-3">
+    <p-accordion>
+        <p-accordionTab header="Filters" [selected]="false">
+          <p-dropdown [options]="labels" 
+                      placeholder="Select Labels"  
+                      optionLabel="label"(onChange)="filterByLabels($event)">
+          </p-dropdown>
+                <br><br>
+            <p-dropdown
+                [options]="states"
+                placeholder="Select a State"
+                optionLabel="state"
+                [showClear]="true"
+                (onChange)="sortByState($event)"
+                >
+            </p-dropdown>
+            <br><br>
+            <p-dropdown
+                [options]="sortingCriteria"
+                placeholder="Sort By"
+                optionLabel="by"
+                (onChange)="sorting($event)"
+                [showClear]="true">
+            </p-dropdown>
+            <br><br>
+        </p-accordionTab>
+        </p-accordion>
+    </div>
+    <div *ngIf="issues.length == 0">
+        <h2 style="margin: auto;">No Issues Found For This Repository </h2>
+    </div>
+
+
+    <div *ngFor="let issue of issues" class="shadow-lg">
+
+        
+        <p-card [style]="{ width: '100%' }" styleClass="p-card-shadow mb-3">
+
+            <div class="grid">
+                <div class="col-1 pb-0 pr-0 pt-4" align="center">
+                    <ng-container
+                        *ngIf="issue.author.avatar_url; else defaultIcon"
+                    >
+                        <img
+                            [src]="issue.author.avatar_url"
+                            alt="User Avatar"
+                            class="user-avatar"
+                            width="30"
+                            height="30"
+                        />
+                    </ng-container>
+                    <ng-template #defaultIcon>
+                        <i
+                            class="fa fa-user-circle-o user-avatar userIcon"
+                            aria-hidden="true"
+                        ></i>
+                    </ng-template>
+                </div>
+    
+                <div class="col-7">
+                    <h4>
+                        <strong>{{ issue.title }}  <span [ngStyle]="{fontSize: '15px', marginRight:'15px'}">by <a  href="{{ issue.author.web_url }}" target="_blank"> {{issue.author.username}} </a></span> </strong>
+                        <span class="state" *ngIf="issue.state == 'opened'" [ngStyle]="{ backgroundColor:'red'}">{{issue.state}}</span>
+                        <span class="state" *ngIf="issue.state == 'closed'" [ngStyle]="{ backgroundColor:'green'}">{{issue.state}}</span>
+                        
+                    </h4>
+                    <i  ngStyle="" class="thumbs pi pi-thumbs-up-fill">{{issue.upvotes}}</i>
+                    <i class="thumbs pi 
+                    pi-thumbs-down-fill">{{issue.downvotes}}</i>
+                </div>
+    
+                <div class="col-2"></div>
+    
+                <div class="col-2">
+                    <div class="text-center" style="display: flex;">
+                        <a  href="{{ issue.web_url }}" target="_blank">
+                            <p class="commit-box shatext">
+                                <a
+                                    class="view-icon"
+                                    href="{{ issue.web_url }}"
+                                    target="_blank"
+                                >
+                                    <i class="fa fa-regular fa-folder"></i>
+                                </a>
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="grid">
+                <div class="col-1"></div>
+    
+                <div class="col-3">
+                Assignees :
+                    <div [ngStyle]="{display: 'inline'}" *ngFor="let assignee of issue.assignees">
+                            <a href="{{ assignee.web_url }}" target="_blank">
+                                <span class="fa fa-user-circle-o user-avatar userIcon" style="color: #7b83eb" pTooltip="Assigned To : {{assignee.username}}" >
+                                </span>
+                            </a>&nbsp;
+                    </div>
+                </div>
+    
+                <div class="col-4">
+                    <div class="p-subheader">
+                        <p class="card-text">
+                            <span
+                                class="pi pi-calendar"
+                                style="color: green"
+                            > Created At : </span>
+                            {{ issue.created_at | date : "HH:mm, MMM d, yyyy" }}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="p-subheader">
+                        <p class="card-text">
+                            <span
+                                class="pi pi-calendar"
+                                style="color: red"
+                            > Updated At : </span>
+                            {{ issue.updated_at | date : "HH:mm, MMM d, yyyy" }}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <p-badge
+                        *ngIf="issue.state === 'opened'"
+                        value="Open"
+                        severity="danger"
+                    ></p-badge>
+                    <!-- <p-badge
+                        *ngIf="issue.state === 'merged'"
+                        value="Merged"
+                        severity="success"
+                    ></p-badge> -->
+                    <p-badge
+                        *ngIf="issue.state === 'closed'"
+                        value="Closed"
+                        severity="info"
+                    ></p-badge>
+                </div>
+                <div class="col-6"></div>
+            </div>
+    
+            <hr />
+<!--     
+            <div *ngIf="request.description; else defaultDesc">
+                <p><strong>Message :</strong> {{ request.description }}</p>
+            </div>
+            <ng-template #defaultDesc>
+                <p><strong>Message :</strong> No Description</p>
+            </ng-template> -->
+        </p-card>
+    </div>
+
+
+
+</div>

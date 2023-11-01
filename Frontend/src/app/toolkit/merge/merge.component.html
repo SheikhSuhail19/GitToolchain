@@ -1,0 +1,243 @@
+
+<div class="ms-1 mt-4">
+    <div class="grid">
+        <div class="col-6 page-title-container">
+            <h2>Merge Requests</h2>
+
+            <app-repository-dropdown
+                (repoChangeEvent)="onRepoChange($event)"
+            ></app-repository-dropdown>
+        </div>
+
+        <div class="col-4 pr-0" align="right">
+            <span class="p-input p-input-icon-right">
+                <i class="pi pi-search"></i>
+
+                <input
+                    type="text"
+                    pInputText
+                    [(ngModel)]="searchQuery"
+                    (input)="searchMergeRequests()"
+                    placeholder="Search By Title"
+                />
+            </span>
+        </div>
+
+        <div class="col-2 pl-0 align-items-end" align="right">
+            <button
+                pButton
+                type="button"
+                style="height: 39px; margin-top: 2px"
+                label="Export as Excel"
+                (click)="exportToCSV()"
+            ></button>
+        </div>
+    </div>
+</div>
+
+<p-tabMenu id="nav-bar" [model]="tabItems"></p-tabMenu>
+
+<div *ngFor="let request of paginateMergeRequests()">
+    
+    <p-card [style]="{ width: '100%' }" styleClass="p-card-shadow mb-3">
+        <div class="grid">
+            <div class="col-1 pb-0 pr-0 pt-4" align="center">
+                <ng-container
+                    *ngIf="request.author.avatar_url; else defaultIcon"
+                >
+                    <img
+                        [src]="request.author.avatar_url"
+                        alt="User Avatar"
+                        class="user-avatar"
+                        width="30"
+                        height="30"
+                    />
+                </ng-container>
+                <ng-template #defaultIcon>
+                    <i
+                        class="fa fa-user-circle-o user-avatar userIcon"
+                        aria-hidden="true"
+                    ></i>
+                </ng-template>
+            </div>
+
+            <div class="col-9">
+                <h4>
+                    <strong>{{ request.title }}</strong>
+                </h4>
+            </div>
+
+            
+
+            <div class="col-2">
+                
+                <div class="d-flex align-items-center">
+                    <div class="text-center" style="display: inline-block;">
+                        <a class="view-icon" href="{{  request.web_url  }}" target="_blank">
+                          <i class="fa fa-regular fa-folder" style="font-size: 1.5rem"></i>
+                        </a>
+            
+                    </div>
+
+
+                    <div *ngIf="request.state === 'opened'" class="ml-3" style="display: inline-block;">
+
+                        <a class="view-icon" target="_blank" [ngClass]="{'disabled-icon': !request.enableNotification}"
+                          (click)="!request.enableNotification ? toggleMessage() : showDialog(request)"
+                          [style.color]="isIconDisabled() ? 'grey' : 'red'"
+                          
+                          [pTooltip]="isIconDisabled()? 'No action required.' : 'Your MR is pending.'"
+                          [tooltipOptions]="{ position: 'top-left', styleClass: 'custom-tooltip' }"
+                          
+                          >
+                        
+                          <i class="pi pi-bell" style="font-size: 1.5rem; padding: 20px;"></i> 
+                          
+            
+            
+                        </a>
+            
+            
+                        
+                        <p-dialog #myDialog header="Send Via.." [(visible)]="isVisible" [draggable]="false"
+                          [style]="{width: '50%',  overflow: 'auto' }" (onHide)="onHideDialog()">
+            
+                          <div class="dialog-body">
+                            <div class="flex flex-wrap gap-3">
+                              <div class="flex align-items-justify radio-button-container">
+                                <p-radioButton name="messagingOption" value="teams" [(ngModel)]="selectedOption"
+                                  inputId="teamsOption"></p-radioButton>
+            
+                                <label for="teamsOption">
+                                  <img src="assets/icons/teams-logo.jfif" alt="Teams Logo" style="width: 3.2rem; height: 3.2rem;" />
+                                </label>
+                              </div>
+            
+                              <div class="flex align-items-justify radio-button-container">
+                                <p-radioButton name="messagingOption" value="outlook" [(ngModel)]="selectedOption"
+                                  inputId="outlookOption"></p-radioButton>
+            
+                                <label for="outlookOption">
+                                  <img src="assets/icons/outlook-logo.png" alt="Outlook Logo"
+                                    style="width: 3rem; height: 3rem;" />
+                                </label>
+                              </div>
+                            </div>
+            
+            
+                            <div *ngIf="selectedOption === 'teams'" class="teams-section">
+                              <div class="flex align-items-center">
+                                <p-dropdown [options]="getReviewersForSelectedMR()"  [(ngModel)]="selectedReviewer" [style]="{ width: '100%' } "
+                                  (ngModelChange)="updateMessage()">
+                                </p-dropdown>
+                              </div>
+                              <div class="flex align-items-center">
+                                <textarea placeholder="Enter your message" [(ngModel)]="messageReviewer" rows="10"
+                                  [style]="{ width: '100%' } " readonly>
+                                </textarea>
+                              </div>
+                            </div>
+            
+                            <div *ngIf="selectedOption === 'outlook'" class="teams-section">
+                              
+                              <div class="flex align-items-center">
+                                <textarea placeholder="Enter your message" [(ngModel)]="emailReviewer" rows="10"
+                                  [style]="{ width: '100%' } " readonly>
+                                </textarea>
+                              </div>
+                            </div>
+            
+                          </div>
+            
+                          <ng-template pTemplate="footer" [style]="{ margin: '10px 0' }">
+                            <p-button icon="pi pi-send" label="Send" (click)="onSendClick(selectedOption)" [disabled]="!selectedOption"
+                              styleClass="p-button-text"></p-button>
+                          </ng-template>
+                        </p-dialog>
+                      </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col-1"></div>
+
+            <div class="col-2">
+                <div class="p-subheader">
+                    <!-- <a href="{{ request.author.web_url }}" target="_blank"
+                        ><span class="pi pi-user" style="color: #7b83eb"></span>
+                        {{ " " }} {{ request.author.name }}</a
+                    > -->
+                    
+                    <app-msteams
+                        [linkStyles]="{ 'color': '#7b83eb'  }"
+                        [linkText]="request.author.name" 
+                        email="{{request.author.username + sopraEmail}}"
+                        message="Hello,"
+                        >
+                        
+                    </app-msteams>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="p-subheader">
+                    <p class="card-text pt-2">
+                        <span
+                            class="pi pi-calendar"
+                            style="color: green"
+                        ></span>
+                        {{ request.created_at | date : "HH:mm, MMM d, yyyy" }}
+                    </p>
+                </div>
+            </div>
+            <div class="col-1">
+                <p-badge
+                    *ngIf="request.state === 'opened'"
+                    value="Open"
+                    severity="danger"
+                ></p-badge>
+                <p-badge
+                    *ngIf="request.state === 'merged'"
+                    value="Merged"
+                    severity="success"
+                ></p-badge>
+                <p-badge
+                    *ngIf="request.state === 'closed'"
+                    value="Closed"
+                    severity="info"
+                ></p-badge>
+            </div>
+            <div class="col-6"></div>
+        </div>
+
+        <hr />
+
+        <div *ngIf="request.description; else defaultDesc">
+            <p><strong>Message :</strong> {{ request.description }}</p>
+        </div>
+        <ng-template #defaultDesc>
+            <p><strong>Message :</strong> No Description</p>
+        </ng-template>
+    </p-card>
+</div>
+
+<div class="container mt-2" *ngIf="filteredMergeRequests.length === 0">
+    <!-- <div>No matches found</div> -->
+    <div class="row-md-4 mb-4">
+      <div class="card container p-3">
+        <div class="text-muted no-border">No Results</div>
+      </div>
+    </div>
+  </div>
+
+<p-paginator
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+    (onPageChange)="onPageChange($event)"
+    [first]="first"
+>
+</p-paginator>

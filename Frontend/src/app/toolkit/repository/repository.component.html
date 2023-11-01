@@ -1,0 +1,32 @@
+<div class="branches-page-container">
+
+    <h1>Repositories</h1>
+
+
+    <div *ngFor="let repo of repositories" >
+        
+    <p-accordion>
+        
+        <p-accordionTab header="{{repo.name}}" [selected]="false">
+            <i class="pi pi-link"></i> <a href="{{repo.http_url_to_repo}}"> Explore on Innersource</a>
+
+            <div class="contributorsCard" *ngFor="let contributors of repo.contributors">
+                <div class="cCard">
+                 <span class="col-4 cname">
+                    <a href="https://innersource.soprasteria.com/{{contributors.name}}">
+                    <i class="pi pi-user"></i> {{contributors.name}}</a>
+                </span> 
+                 <span class="col-6">
+                    <i class=" text-green-700 pi pi-send cmail"></i> {{contributors.email}}
+                </span> 
+                 <span class="col-3 ccommit">
+                    <i class="pi text-orange-700 pi-box"></i> Commits : {{contributors.commits}}
+                </span>
+                </div>
+            </div>
+        </p-accordionTab>
+        </p-accordion>
+ 
+    </div>
+
+</div>

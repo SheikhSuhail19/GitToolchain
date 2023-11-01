@@ -1,0 +1,10 @@
+<div class="deep-link-main-conatiner">
+    <div class="deepLink-container">
+        <div [ngStyle]="linkStyles" id="deep-link-text">{{ linkText }}</div>
+        <div class="deepLinkIcon-container">
+            <app-dynamic-hover-icons iconClass="pi pi-envelope message pii" [toolTipName]="linkText" toolTipText="Message" [hrefValue]="generateLinkChat()"></app-dynamic-hover-icons>
+            <app-dynamic-hover-icons iconClass="pi pi-phone message pii" [toolTipName]="linkText" toolTipText="Start a call with" [hrefValue]="generateLinkCall()"></app-dynamic-hover-icons>
+            <app-dynamic-hover-icons iconClass="pi pi-video message pii" [toolTipName]="linkText" toolTipText="Start a video call with" [hrefValue]="generateLinkVideoCall()"></app-dynamic-hover-icons>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="grid" style="padding: 10px;">
+    <div *ngIf="isIssueCard">
+        <span class="text-green-500 font-medium col-6 pb-0"
+            >Open: {{ cardData.opened }}</span>
+        <span class="text-red-500 font-medium col-6 pb-0">
+            Closed: {{ cardData.closed }}</span>
+        <br /><br />
+        <span class="font-medium col-3 pb-0">Labels: </span>
+        <ng-container *ngFor="let value of coloredLables; let i = index">
+            <p-tag
+                style="padding: 5px;"
+                severity="{{ coloredLables[i][1] }}"
+                value="{{ value[0] }}"
+                [rounded]="true">
+            </p-tag>
+        </ng-container>
+    </div>
+    <div *ngIf="isMRCard">
+        <span class="text-green-500 font-medium col-3 pb-0"
+            >Open: {{ cardData.opened }}</span
+        >
+        <span class="text-red-500 font-medium col-3 pb-0">
+            Closed: {{ cardData.closed }}</span
+        >
+        <span class="text-blue-500 font-medium col-3 pb-0"
+            >Merged: {{ cardData.merged }}</span
+        >
+    </div>
+    <div *ngIf="isCommitCard">
+        <span class="text-red-500 font-medium col-3 pb-0">
+            In Last 24Hrs: {{ cardData.Last_24_Hrs }}</span
+        >
+        <span class="text-blue-500 font-medium col-3 pb-0"
+            >In Last 7 Days: {{ cardData.Last_7_Days }}</span
+        >
+    </div>
+    <div *ngIf="isBranchCard">
+        <span class="text-green-500 font-medium col-3 pb-0">
+            Activity In Last 24 Hours:
+            {{ cardData.branch_changed_in_last_24_hour }}</span
+        >
+    </div>
+</div>

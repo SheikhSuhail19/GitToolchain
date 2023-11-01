@@ -1,0 +1,22 @@
+::ng-deep .p-accordion-content {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+::ng-deep .p-accordion .p-accordion-header .p-accordion-header-link {
+    padding: 10px;
+}
+
+::ng-deep .p-dropdown {
+    width: 100%;
+}
+
+p {
+    margin: 0 10px;
+}
+
+span {
+    width: 20%;
+    margin-top: 10px;
+}

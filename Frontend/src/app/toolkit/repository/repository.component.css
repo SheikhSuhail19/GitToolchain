@@ -1,0 +1,10 @@
+.cCard{
+    width: 100%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.ccommit{
+    float: inline-end;
+}

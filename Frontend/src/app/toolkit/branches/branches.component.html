@@ -1,0 +1,42 @@
+<!-- subheadings will be shown with dot separator, for each subheading you can provide three properties 
+in the form of array which will be like ["subheading","link attached to subheading", "true or false
+describing whether it should be shown as hyperlink or not"] -->
+<div class="branches-page-container">
+    <app-tab-menu
+        (searchResult)="searchBranches($event)"
+        (repoChangeEvent)="onRepoChange($event)"
+        (exportCSVEvent)="exportCSV()"
+        [exportCSVButton]="true"
+    ></app-tab-menu>
+
+    <app-filters-accordian
+        (filterChangeEvent)="onFilterChange($event)"
+        (dateChangeEvent)="onDateSelect($event)"
+    ></app-filters-accordian>
+    <h2 *ngIf="!totalBranches">No Branches</h2>
+    <app-entity-card
+        style="margin-top: 10px"
+        *ngFor="let branch of branches; index as i"
+        heading="{{ branch.name }}"
+        web_url="{{ branch.web_url }}"
+        authorName="{{ 'by ' + branch.authorName }}"
+        authorEmail="{{ branch.authorEmail }}"
+        [showMergeBtn]="true"
+        mergeUrl="{{ branch.mergeUrl }}"
+        [subHeadings]="[
+            [branch.shortId, branch.web_url, 'true'],
+            [branch.commitMessage, branch.commitUrl, 'false'],
+            [getTimeDiff(branch.commitCommittedAt), '', 'false']
+        ]"
+        [labels]="cardLabels[i]"
+        [showBottomDivider]="false"
+        headingColor="black"
+        subheadingColor="grey"
+    >
+    </app-entity-card>
+
+    <app-pagination
+        [length]="totalBranches"
+        (pageChangeEvent)="OnPageChange($event)"
+    ></app-pagination>
+</div>

@@ -1,0 +1,14 @@
+<div class="avatar-container">
+<div *ngIf="avatarUrl; else defaultAvatar" >
+    <p-avatar image="{{avatarUrl}}" size="large" shape="circle" class="p-mr-2"> </p-avatar>
+  </div>
+  <ng-template #defaultAvatar>
+    <div class="default-avatar">
+        <p-avatar label="{{firstLetter(name)}}" styleClass="mr-2" size="large" [style]="{ 'background-color': '#2196F3', color: '#ffffff' }" shape="circle"></p-avatar>
+    </div>
+  </ng-template>
+  <div class="name-username">
+    <p>{{ name }}</p>
+    <p>{{ username }}</p>
+  </div>
+</div>  

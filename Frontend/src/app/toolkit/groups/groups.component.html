@@ -1,0 +1,36 @@
+<!-- subheadings will be shown with dot separator, for each subheading you can provide three properties 
+in the form of array which will be like ["subheading","link attached to subheading", "true or false
+describing whether it should be shown as hyperlink or not"] -->
+<div class="groups-page-container">
+    <app-tab-menu
+        class="menu-class"
+        (searchResult)="searchGroups($event)"
+        (sortByEvent)="onSort($event)"
+        [isDropdown]="false"
+        [isShowGroup]="true"
+        [isSortByDropDown]="true"
+        heading="Groups"
+    ></app-tab-menu>
+    <h2 *ngIf="!totalLength">No Groups</h2>
+    <app-entity-card
+        style="margin-top: 10px"
+        *ngFor="let group of groups; index as i"
+        heading="{{ group.name }}"
+        authorName="{{ '- ' + group.full_name }}"
+        [showMergeBtn]="false"
+        web_url="{{ group.web_url }}"
+        [subHeadings]="[
+            [group.id, '', ''],
+            [group.visibility, '', '    ']
+        ]"
+        [showBottomDivider]="false"
+        headingColor="black"
+        subheadingColor="grey"
+    >
+    </app-entity-card>
+
+    <app-pagination
+        [length]="totalLength"
+        (pageChangeEvent)="onPageChange($event)"
+    ></app-pagination>
+</div>

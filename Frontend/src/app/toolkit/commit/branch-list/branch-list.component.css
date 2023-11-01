@@ -1,0 +1,17 @@
+.view {
+    padding-top: 32.2px;
+}
+
+::ng-deep .custom-panel-header {
+    font-size: 1em;
+}
+::ng-deep .p-panel-title {
+    font-size: 19px !important;
+}
+
+.sticky-panel {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}

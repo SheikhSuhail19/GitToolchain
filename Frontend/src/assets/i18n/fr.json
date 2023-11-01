@@ -1,0 +1,26 @@
+{
+    "home": {
+        "main": "ACCUEIL",
+        "dashboard": "Tableau de bord"
+    },
+    "your_work": {
+        "main": "VOTRE TRAVAIL",
+        "groups": "Groupes",
+        "commits": "Commits",
+        "repository": "Dépôt",
+        "branches": "succursales",
+        "merge_req": "Demande de fusion",
+        "members":"Membres",
+        "pipelines":"Pipelines",
+        "charts": "Graphiques",
+        "misc": "Divers"
+    },
+    "others": {
+        "main": "Autres",
+        "auth": "Authentification",
+        "login":"se connecter",
+        "error":"erreur",
+        "access_denied":"Accès refusé",
+        "web": "Web"
+    }
+}

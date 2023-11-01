@@ -1,0 +1,34 @@
+.deepLink-container{
+    width: max-content;
+    padding: 0.7em 1em;
+    position: relative;
+    cursor: pointer;
+    text-decoration: underline;
+    z-index: 10;
+  }
+
+  .deepLink-container:hover{
+    color: blue;
+  }
+
+  .deepLinkIcon-container{
+    border-radius: 12px;
+    position: absolute;
+    transform: translate(0, -60%);
+    width: max-content;
+    left: 20%;
+    bottom: -100%;
+    opacity:0;
+    transition: .25s all;
+    display: none;
+  }
+
+  .deepLink-container:hover .deepLinkIcon-container{
+    bottom: -200%;
+    opacity:1;
+    display: flex;
+  }
+
+  
+
+

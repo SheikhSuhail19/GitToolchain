@@ -1,0 +1,44 @@
+<div class="card flex justify-content-center" id="accordion" style=" display: flex;
+flex-direction: column;">
+  <div class="header" style="display:'flex'; flex-direction: 'column';">
+    <h2> Projects</h2>
+
+    <span class="p-input-icon-left ml-auto" style="margin-bottom: 2%;">
+      <i class="pi pi-search"></i>
+      <input pInputText type="text" [(ngModel)]="searchTerm" [placeholder]="placeholderText" (input)="applyFilter()">
+    </span>
+
+    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear()"
+      style="margin-bottom: 2%; transform: translateX(40%);"></button>
+
+  </div>
+
+  <p-accordion #accordion [activeIndex]="0">
+
+    <div *ngIf="!searchTerm">
+      <p-accordionTab *ngFor="let section of pagedRepoData; let i = index" [header]="section.name"
+        (click)="onAccordionTabClick(section, i)">
+        <ng-container *ngIf="activeSection === section">
+          <table-filter-menu-demo [id]="section.id" [section]="section"></table-filter-menu-demo>
+        </ng-container>
+      </p-accordionTab>
+    </div>
+
+    <div *ngIf="searchTerm">
+      <p-accordionTab *ngFor="let section of filteredRepoData; let i = index" [header]="section.name"
+        (click)="onAccordionTabClick(section, i)">
+        <ng-container *ngIf="activeSection === section">
+          <table-filter-menu-demo [id]="section.id" [section]="section"></table-filter-menu-demo>
+        </ng-container>
+      </p-accordionTab>
+    </div>
+
+
+  </p-accordion>
+
+  <p-paginator [rows]="rows" [first]="first" [totalRecords]="totalRecords" (onPageChange)="onPageChange($event)"
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+  </p-paginator>
+
+</div>

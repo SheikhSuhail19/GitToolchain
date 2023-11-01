@@ -1,0 +1,50 @@
+<div class="tab-menu-container">
+    <div class="tab-menu-left">
+        <app-repository-dropdown
+            *ngIf="isDropdown"
+            (repoChangeEvent)="onRepoChange($event)"
+        ></app-repository-dropdown>
+        <p class="tab-menu-group-heading" *ngIf="isShowGroup">{{ heading }}</p>
+        <p-tabMenu
+            class="tab-menu-container"
+            [model]="items"
+            [activeItem]="activeItem"
+        />
+    </div>
+    <div class="tab-menu-right">
+        <div *ngIf="isSortByDropDown" style="display: flex">
+            <span class="p-float-label">
+                <p-dropdown
+                    [options]="sortingOptions"
+                    [(ngModel)]="selectedSortingOption"
+                    inputId="sorting-label"
+                    (onChange)="onOrderByChange($event.value)"
+                ></p-dropdown>
+                <label for="sorting-label">Sort By</label>
+            </span>
+            <p-button
+                icon="pi pi-arrows-v"
+                (onClick)="onSortingChange()"
+            ></p-button>
+        </div>
+        <div>
+            <input
+                type="text"
+                pInputText
+                [(ngModel)]="value"
+                placeholder="{{ searchBoxText }}"
+            />
+            <p-button icon="pi pi-search" (onClick)="onSearch()"></p-button>
+        </div>
+
+        <div *ngIf="exportCSVButton">
+            <div
+                pButton
+                type="button"
+                style="height: 39px; margin-top: 2px"
+                label="Export as Excel"
+                (click)="onExportCSV($event)"
+            ></div>
+        </div>
+    </div>
+</div>

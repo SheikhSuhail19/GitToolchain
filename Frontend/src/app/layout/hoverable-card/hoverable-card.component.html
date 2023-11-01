@@ -1,0 +1,10 @@
+<div class="hoverablecard grid" (mouseenter)="hoverCheck = true" (mouseleave)="hoverCheck = false">
+    <app-card class="cardsolid col-12 pb-0" 
+        [cardData]=cardData 
+        [classData]=classData>
+    </app-card>
+    <app-hovercard [ngClass]="{ 'hoveringcard': true, 'hide': !hoverCheck}"
+        class="cardhover col-6 lg:col-6 xl:col-3"
+        [cardData]=cardData>
+    </app-hovercard>
+</div>

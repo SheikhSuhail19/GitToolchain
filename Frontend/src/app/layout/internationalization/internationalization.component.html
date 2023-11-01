@@ -1,0 +1,5 @@
+<p-overlayPanel #op>
+    <p-dropdown [options]="Languages" [(ngModel)]="selectedLanguage" optionLabel="name"
+        (onChange)="onLanguageChange($event) "></p-dropdown>
+</p-overlayPanel>
+<i class="pi pi-language" (click)="op.toggle($event)"></i>

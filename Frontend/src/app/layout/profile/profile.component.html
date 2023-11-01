@@ -1,0 +1,21 @@
+
+<div >
+    <p-overlayPanel #op>
+        <ng-template pTemplate="content">
+            <div *ngIf="!isAvatar" >
+                <p-avatar class="flex justify-content-center" icon="pi pi-user" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+            </div>
+            <div *ngIf="isAvatar">
+                <p-avatar class="flex justify-content-center" image={{profileData.avatar_url}} styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+            </div>
+            <h4 style="color:green;" >{{profileData.username}} </h4>
+            
+            <b style="color:grey;">{{profileData.email}}</b> <br><br>
+            <br>
+            <p-button (click)="logout()" class="flex justify-content-center" label="Logout" styleClass="p-button-raised p-button-text p-button-secondary"></p-button>
+
+        </ng-template>
+    </p-overlayPanel>
+    <p-button icon="pi pi-user" styleClass="p-button-rounded p-button-lg p-button-info p-button-text p-button-raised" (click)="op.toggle($event)"></p-button>
+
+</div>

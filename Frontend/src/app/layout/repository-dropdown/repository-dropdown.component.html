@@ -1,0 +1,15 @@
+<span class="p-float-label dropdown-container">
+    <p-dropdown
+        class="dropdown"
+        [options]="repositories"
+        [(ngModel)]="selectedRepository"
+        optionLabel="name"
+        [filter]="true"
+        filterBy="name"
+        placeholder="{{ selectRepoText }}"
+        (onChange)="onChange($event.value.id)"
+        inputId="float-label"
+    >
+    </p-dropdown>
+    <label for="float-label">Select a Repository</label>
+</span>

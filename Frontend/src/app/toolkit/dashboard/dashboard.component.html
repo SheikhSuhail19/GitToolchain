@@ -1,0 +1,199 @@
+<app-repository-dropdown
+    style="display: block; padding-left: 0; width: 50%"
+    class="col-12 lg:col-6 xl:col-3 repo-container"
+    (repoChangeEvent)="updateDashboard($event)"
+></app-repository-dropdown>
+<div class="grid">
+    <app-hoverable-card
+        [cardData]="branchesData"
+        [classData]="branchesCardClasses"
+        class="col-12 lg:col-6 xl:col-3 mb-0"
+    ></app-hoverable-card>
+    <app-hoverable-card
+        [cardData]="issuesData"
+        [classData]="issuesCardClasses"
+        class="col-12 lg:col-6 xl:col-3 mb-0"
+    ></app-hoverable-card>
+    <app-hoverable-card
+        [cardData]="mergeRequestsData"
+        [classData]="mergeCardClasses"
+        class="col-12 lg:col-6 xl:col-3 mb-0 px-2"
+    ></app-hoverable-card>
+    <app-hoverable-card
+        [cardData]="totalCommitsData"
+        [classData]="commitsCardClasses"
+        class="col-12 lg:col-6 xl:col-3 mb-0"
+    ></app-hoverable-card>
+
+    <!-- <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3"
+                        >Repository</span
+                    >
+                    <div class="text-900 font-medium text-xl">28</div>
+                </div>
+                <div
+                    class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+                    [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                >
+                    <i class="pi pi-table text-cyan-500 text-xl"></i>
+                </div>
+            </div>
+            <span class="text-green-500 font-medium">5 </span>
+            <span class="text-500">newly registered</span>
+        </div>
+    </div> -->
+    <!-- <div class="col-12 lg:col-6 xl:col-3">
+        <div class="card mb-0">
+            <div class="flex justify-content-between mb-3">
+                <div>
+                    <span class="block text-500 font-medium mb-3"
+                        >Branches</span
+                    >
+                    <div class="text-900 font-medium text-xl">
+                        Total - {{ branchNumber }}
+                    </div>
+                </div>
+                <div
+                    class="flex align-items-center justify-content-center bg-purple-100 border-round"
+                    [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+                >
+                    <i class="pi pi-list text-purple-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="col-12 xl:col-6">
+
+
+        <!-- <div style=" display: flex;
+        align-items: center;
+        gap: 12px;
+        justify-content: space-between;
+            ">
+            <app-merge-chart [repoId]="repoId" [mergeData]="mergeRequestsData"></app-merge-chart>
+            <app-issue-chart  [repoId]="repoId" [issueData]="issuesData"></app-issue-chart>
+        </div> -->
+
+        <div class="card">
+            <h5>Merge Requests</h5>
+            <p-table [paginator]="true" [rows]="5" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Repository</th>
+                        <th pSortableColumn="name">
+                            Branch <p-sortIcon field="name"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="price">
+                            Merge Requests
+                            <p-sortIcon field="price"></p-sortIcon>
+                        </th>
+                        <th>View/Charts</th>
+                    </tr>
+                </ng-template>
+                <ng-template let-product>
+                    <tr>
+                        <td style="width: 15%; min-width: 5rem">ABC</td>
+                        <td style="width: 35%; min-width: 7rem">XYZ</td>
+                        <td style="width: 35%; min-width: 8rem">50</td>
+                        <td style="width: 15%">
+                            <button
+                                pButton
+                                pRipple
+                                type="button"
+                                icon="pi pi-search"
+                                class="p-button p-component p-button-text p-button-icon-only"
+                            ></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <div class="col-12 xl:col-6">
+        <div class="card">
+            <h5>Issues</h5>
+            <p-chart
+                type="line"
+                [data]="chartData"
+                [options]="chartOptions"
+            ></p-chart>
+        </div>
+
+        <div class="card">
+            <div class="flex align-items-center justify-content-between mb-4">
+                <h5>Notifications</h5>
+            </div>
+
+            <span class="block text-600 font-medium mb-3">TODAY</span>
+            <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                <li
+                    class="flex align-items-center py-2 border-bottom-1 surface-border"
+                >
+                    <div
+                        class="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0"
+                    >
+                        <i class="pi pi-list text-xl text-blue-500"></i>
+                    </div>
+                    <span class="text-900 line-height-3"
+                        >Richard Jones
+                        <span class="text-700">
+                            has created an issue at
+                            <span class="text-blue-500">06:00AM</span></span
+                        >
+                    </span>
+                </li>
+                <li class="flex align-items-center py-2">
+                    <div
+                        class="w-3rem h-3rem flex align-items-center justify-content-center bg-orange-100 border-circle mr-3 flex-shrink-0"
+                    >
+                        <i class="pi pi-download text-xl text-orange-500"></i>
+                    </div>
+                    <span class="text-700 line-height-3"
+                        >Your merge request is pending from
+                        <span class="text-blue-500 font-medium"
+                            >8 days</span
+                        ></span
+                    >
+                </li>
+            </ul>
+
+            <span class="block text-600 font-medium mb-3">YESTERDAY</span>
+            <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+                <li
+                    class="flex align-items-center py-2 border-bottom-1 surface-border"
+                >
+                    <div
+                        class="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0"
+                    >
+                        <i class="pi pi-list text-xl text-blue-500"></i>
+                    </div>
+                    <span class="text-900 line-height-3"
+                        >Richard Jones
+                        <span class="text-700">
+                            has created an issue at
+                            <span class="text-blue-500">06:00AM</span></span
+                        >
+                    </span>
+                </li>
+                <li class="flex align-items-center py-2">
+                    <div
+                        class="w-3rem h-3rem flex align-items-center justify-content-center bg-orange-100 border-circle mr-3 flex-shrink-0"
+                    >
+                        <i class="pi pi-download text-xl text-orange-500"></i>
+                    </div>
+                    <span class="text-700 line-height-3"
+                        >Your merge request is pending from
+                        <span class="text-blue-500 font-medium"
+                            >8 days</span
+                        ></span
+                    >
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="card-container">
+    <div class="card">
+        <div class="card-top-container">
+            <div class="card-top-left-continer">
+                <div class="top-row">
+                    <a
+                        href="{{ web_url }}"
+                        target="_blank"
+                        class="title clickable-link"
+                        >{{ heading }}</a
+                    >
+                    <span
+                        *ngIf="authorName !== ''"
+                        class="title author-title clickable-link"
+                    >
+                        <span *ngIf="authorEmail !== ''">
+                            <app-msteams
+                                [linkStyles]="{ color: 'inherit' }"
+                                [email]="authorEmail"
+                                [linkText]="authorName"
+                                [message]="
+                                    defaultMessage +
+                                    authorEmail.split('.')[0] +
+                                    ','
+                                "
+                            ></app-msteams>
+                        </span>
+                        <span *ngIf="authorEmail === ''">
+                            {{ authorName }}
+                        </span>
+                    </span>
+                </div>
+                <div class="subheading-container">
+                    <div
+                        *ngFor="
+                            let subHeading of subHeadings;
+                            let first = first;
+                            let last = last
+                        "
+                    >
+                        <a
+                            [ngStyle]="{
+                                color: subheadingColor,
+                                'font-size': subheadingFontSize
+                            }"
+                            class="card-subheading"
+                            [ngClass]="{
+                                'branch-link clickable-link':
+                                    subHeading[2] === 'true',
+                                'cursor-none': subHeading[1] === ''
+                            }"
+                            href="{{ subHeading[1] }}"
+                            >{{
+                                (subHeading[0] | slice : 0 : 50) +
+                                    (subHeading[0].length > 50 ? "......" : "")
+                            }}
+                        </a>
+                        <span
+                            *ngIf="last === false"
+                            [ngStyle]="{
+                                color: subheadingColor,
+                                'font-size': subheadingFontSize
+                            }"
+                            class="card-subheading circle-separator"
+                            >&bull;</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="card-top-right-container">
+                <a href="{{ mergeUrl }}" target="_blank">
+                    <p-button
+                        *ngIf="showMergeBtn"
+                        styleClass="p-button-outlined merge-btn p-button-secondary"
+                    >
+                        <img
+                            alt="logo"
+                            src="../../../assets/icons/merge_branch_icon.png"
+                            style="width: 1.5rem"
+                        />
+                        <span class="font-bold merge-btn-label">Merge</span>
+                    </p-button>
+                </a>
+            </div>
+        </div>
+
+        <hr *ngIf="showBottomDivider" style="width: 100%" />
+        <div class="label-container">
+            <app-label
+                *ngFor="let label of labels"
+                badgeValue="{{ label[0] }}"
+                badgeColor="{{ label[1] }}"
+            ></app-label>
+        </div>
+    </div>
+</div>

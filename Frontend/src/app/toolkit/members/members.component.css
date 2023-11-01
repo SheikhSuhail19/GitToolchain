@@ -1,0 +1,16 @@
+.members-page-container {
+    background-color: rgb(255 255 255);
+    padding: 35px 10px 15px 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 70vh;
+}
+
+h2 {
+    text-align: center;
+    margin: auto;
+}
+
+.table-container {
+    margin-top: 30px;
+}

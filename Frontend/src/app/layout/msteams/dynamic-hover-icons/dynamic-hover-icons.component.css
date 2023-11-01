@@ -1,0 +1,63 @@
+.deepLink-anchor {
+    text-decoration: none;
+  }
+  
+  .deepLink-btn {
+    border-radius: 12px;
+    background: #464eb8;
+    padding: 0.8em 0.9em;
+    margin: 0.5rem;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    border: 1.5px solid #464eb8;
+  }
+  
+  .deepLink-btn:hover {
+    background-color: rgb(227, 227, 228);
+    transition: 0.1s all;
+  }
+  
+  .pii {
+    color: rgb(230, 229, 239);
+    font-size: 1rem;
+  }
+  
+  .deepLink-btn:hover .pii {
+    color: #444cb3;
+    font-weight: bold;
+  }
+  
+  .deepLink-tooltip {
+    position: absolute;
+    border-radius: 5px;
+    left: 50%;
+    bottom: -90%;
+    opacity: 0;
+    background-color: #f7f4f4;
+    font-size: 1em;
+    text-align: left;
+    white-space: nowrap;
+    padding: 8px;
+    transform: translate(-50%, 1em);
+    transition: all 0.15s ease-in-out;
+    display: none;
+    z-index: 10;
+  }
+  
+  .deepLink-btn:hover .deepLink-tooltip {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    display: block;
+  }
+  
+  .deepLink-tooltip::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    border: 0.5em solid transparent;
+    border-bottom-color: #bababa;
+    transform: translate(-40%, 0);
+  }
+  
